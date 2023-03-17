@@ -1,0 +1,27 @@
+syntax = "proto3";
+package links;
+
+option go_package = "/links";
+service LinksService {
+	rpc Create (CreateShortLinkRequest) returns (CreateShortLinkResponse);
+	rpc Retrive (RetriveOriginalLinkRequest) returns (RetriveOriginalLinkResponse);
+} 
+
+message Link {
+	string url = 1;
+}
+
+message CreateShortLinkRequest {
+	Link originalLink = 1;
+}
+
+message RetriveOriginalLinkRequest {
+	Link shortLink = 1;
+}
+
+message CreateShortLinkResponse {
+	Link shortLink = 1;
+}
+message RetriveOriginalLinkResponse {
+	Link originalLink = 1;
+}
