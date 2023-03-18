@@ -4,9 +4,11 @@
 Пример JSON файла:
 ```javascript
 {
-	"dbname": "shortlinks",
-	"username": "postgres",
-	"password": "123456"
+    "hostname": "host.docker.internal",
+    "port": "32772",
+    "dbname": "postgres",
+    "username": "postgres",
+    "password": "postgrespw"
 }
 ```
 ## Эндпоинты
