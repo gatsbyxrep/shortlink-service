@@ -57,14 +57,15 @@ func (httpServer HttpServer) performIndexRequest(w http.ResponseWriter, req *htt
 	switch req.Method {
 	case "POST":
 		{
-			response, _ := httpServer.linksService.Create(context.TODO(), &links.CreateShortLinkRequest{
+			response, err := httpServer.linksService.Create(context.TODO(), &links.CreateShortLinkRequest{
 				OriginalLink: &links.Link{
 					Url: bodyStr,
 				},
 			})
 			if err != nil {
-				log.Println("[ERROR]:" + err.Error())
-				w.WriteHeader(http.StatusInternalServerError)
+				log.Println(err.Error())
+				w.WriteHeader(http.StatusBadRequest)
+				w.Write([]byte(err.Error()))
 				return
 			}
 			w.WriteHeader(http.StatusOK)
@@ -78,8 +79,9 @@ func (httpServer HttpServer) performIndexRequest(w http.ResponseWriter, req *htt
 				},
 			})
 			if err != nil {
-				log.Println("[ERROR]:" + err.Error())
-				w.WriteHeader(http.StatusInternalServerError)
+				log.Println(err.Error())
+				w.WriteHeader(http.StatusBadRequest)
+				w.Write([]byte(err.Error()))
 				return
 			}
 			w.WriteHeader(http.StatusOK)
