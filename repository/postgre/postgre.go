@@ -13,9 +13,11 @@ type Postgre struct {
 	conn *pgx.Conn
 }
 
-func Init(dbName, username, password string) (Postgre, error) {
+func Init(hostName, port, dbName, username, password string) (Postgre, error) {
 	// Probably need to be changed if runs in docker
-	url := fmt.Sprintf("postgres://%s:%s@localhost:5432/%s", username, password, dbName)
+	//url := fmt.Sprintf("postgres://%s:%s@%s:%s/%s", hostName, port, username, password, dbName)
+	// postgres://postgres:postgrespw/postgres@postgreshost.docker.internal:32771"
+	url := fmt.Sprintf("postgres://%s:%s@%s:%s/%s", username, password, hostName, port, dbName)
 	conn, err := pgx.Connect(context.Background(), url)
 	if err != nil {
 		return Postgre{}, err

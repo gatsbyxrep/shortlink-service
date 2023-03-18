@@ -57,7 +57,7 @@ func run(ctx context.Context) error {
 		if err != nil {
 			return err
 		}
-		rep, err = postgre.Init(settings.DBName, settings.Username, settings.Password)
+		rep, err = postgre.Init(settings.HostName, settings.Port, settings.DBName, settings.Username, settings.Password)
 		if err != nil {
 			return err
 		}
